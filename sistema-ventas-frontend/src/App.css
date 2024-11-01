@@ -1,0 +1,174 @@
+/* src/App.css */
+
+/* Global Styles */
+body {
+  margin: 0;
+  font-family: 'Roboto', Arial, sans-serif;
+  background: linear-gradient(to right, #e0f7fa, #b2ebf2);
+  color: #333333;
+}
+
+/* Main Container */
+.app-container {
+  max-width: 1200px; /* Ampliar el ancho máximo del contenedor */
+  margin: 20px auto;
+  padding: 30px; /* Aumentar el padding */
+  text-align: center;
+  background-color: #ffffff;
+  border-radius: 10px; /* Cambiar el radio de borde para un efecto más suave */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Aumentar la sombra */
+}
+
+/* Heading Styles */
+h1, h2, h3 {
+  color: #2C3E50;
+}
+
+h1 {
+  font-size: 3em; /* Aumentar tamaño de fuente */
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+h2 {
+  font-size: 2em; /* Aumentar tamaño de fuente */
+  font-weight: normal;
+  margin: 15px 0;
+}
+
+h3 {
+  font-size: 1.5em; /* Aumentar tamaño de fuente */
+  margin: 15px 0;
+  color: #495057;
+}
+
+/* Button Styles */
+button {
+  padding: 12px 24px; /* Aumentar padding para botones */
+  background-color: #4CAF50; /* Cambiar color a verde más vibrante */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  font-size: 1em;
+  margin: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+  background-color: #388E3C; /* Color más oscuro al pasar el ratón */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+button.edit-button {
+  background-color: #2196F3; /* Color azul */
+}
+
+button.edit-button:hover {
+  background-color: #1976D2; /* Color azul oscuro */
+}
+
+button.delete-button {
+  background-color: #F44336; /* Color rojo */
+}
+
+button.delete-button:hover {
+  background-color: #D32F2F; /* Color rojo oscuro */
+}
+
+/* Form Styles */
+form {
+  margin: 20px 0;
+  padding: 25px; /* Aumentar padding del formulario */
+  background-color: #f1f1f1; /* Color de fondo más suave */
+  border-radius: 10px; /* Cambiar el radio de borde */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+form h3 {
+  margin-top: 0;
+}
+
+form input, form select, form textarea {
+  width: calc(100% - 20px);
+  padding: 12px; /* Aumentar el padding de los inputs */
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 1em;
+}
+
+form textarea {
+  resize: vertical;
+  min-height: 100px; /* Aumentar el tamaño mínimo del textarea */
+}
+
+/* Table Styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  background-color: #f1f1f1; /* Cambiar el color de fondo de la tabla */
+}
+
+table th, table td {
+  padding: 15px; /* Aumentar padding de celdas */
+  text-align: center;
+  border: 1px solid #ddd;
+  font-size: 1em;
+}
+
+table th {
+  background-color: #e9ecef; /* Color de fondo más suave */
+  color: #2C3E50;
+  font-weight: bold;
+}
+
+table img {
+  width: 100px; /* Ajustar el tamaño de las imágenes */
+  height: auto;
+  border-radius: 5px;
+}
+
+/* Proveedor Card Styles */
+.proveedor {
+  background-color: #ffffff;
+  padding: 25px; /* Aumentar el padding */
+  border-radius: 10px; /* Cambiar el radio de borde */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  margin: 15px 0;
+  text-align: left;
+}
+
+.proveedor h3 {
+  margin-top: 0;
+  font-size: 1.6em; /* Aumentar tamaño de fuente */
+  color: #2C3E50;
+}
+
+.proveedor p {
+  font-size: 1em;
+  color: #6c757d;
+  margin: 5px 0;
+}
+
+/* Additional Containers */
+.carrito-container, .pago-form-container, .historial-container {
+  margin: 20px 0;
+  padding: 20px; /* Aumentar padding */
+  border: 1px solid #ddd;
+  border-radius: 10px; /* Cambiar el radio de borde */
+  background-color: #ffffff;
+}
+
+/* Estilos para las imágenes de los artículos */
+.articulo-img {
+  max-width: 120px; /* Ajusta el tamaño máximo de las imágenes de artículos */
+  height: auto;
+  border-radius: 5px;
+  display: block;
+  margin: 0 auto; /* Centra la imagen en su contenedor */
+}

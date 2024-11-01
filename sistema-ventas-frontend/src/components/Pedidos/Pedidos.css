@@ -1,0 +1,29 @@
+/* src/components/Pedidos/Pedidos.css */
+
+.pedidos-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f51313;
+    border-radius: 5px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .pedido-item {
+    padding: 10px;
+    border-bottom: 1px solid #1cda1c;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .pedido-item-title {
+    font-weight: bold;
+    color: #333333;
+  }
+  
+  .pedido-item-total {
+    color: #27AE60;
+    font-weight: bold;
+  }
+  

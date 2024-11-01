@@ -1,0 +1,161 @@
+/* src/Articulo.css */
+
+.articulo-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 30px 0; /* Mayor separación de márgenes */
+    background-color: #ffffff; /* Fondo blanco para mejor contraste */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra para la tabla */
+    border-radius: 8px; /* Bordes redondeados */
+    overflow: hidden; /* Para bordes redondeados */
+}
+
+.articulo-table th, 
+.articulo-table td {
+    padding: 15px; /* Aumentar el padding */
+    text-align: center; /* Asegúrate de que todos los textos estén centrados */
+    border: 1px solid #ddd; /* Color del borde */
+    font-size: 1em; 
+    transition: background-color 0.3s; /* Transición suave */
+}
+
+.articulo-table th {
+    background-color: #27AE60; /* Color de fondo de encabezados */
+    color: #ffffff; /* Color del texto de encabezados */
+    font-weight: bold;
+}
+
+.articulo-table tr:nth-child(even) {
+    background-color: #f9f9f9; /* Color de fondo para filas pares */
+}
+
+.articulo-table tr:hover {
+    background-color: #eaeaea; /* Color de fondo al pasar el mouse sobre la fila */
+}
+
+/* Estilo para las imágenes */
+.articulo img {
+    width: 80px; /* Establecer un ancho fijo para las imágenes */
+    height: auto; /* Mantiene la proporción de la imagen */
+    border-radius: 5px; /* Bordes redondeados */
+}
+
+/* Estilo de botones */
+button {
+    padding: 8px 12px; /* Aumentar padding */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    font-size: 0.9em; /* Ajustar tamaño de fuente */
+    transition: background-color 0.3s, opacity 0.3s; /* Transiciones suaves */
+}
+
+.edit-button {
+    background-color: #3498db; /* Color de fondo del botón de editar */
+}
+
+.delete-button {
+    background-color: #e74c3c; /* Color de fondo del botón de eliminar */
+}
+
+button:hover {
+    opacity: 0.9; /* Efecto de opacidad al pasar el mouse */
+}
+
+/* Estilo específico para el botón de detalles */
+.detalle-button {
+    background-color: #f39c12; /* Color de fondo del botón de detalles */
+}
+
+.detalle-button:hover {
+    background-color: #e67e22; /* Color al pasar el mouse */
+}
+
+.detalle-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Asegúrate de que esté sobre otros elementos */
+}
+
+.detalle-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: left;
+    width: 90%; /* Ajustar a un ancho responsivo */
+    max-width: 400px; /* Limitar el ancho máximo */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.detalle-content img {
+    width: 100%; /* Ajusta la imagen al contenedor */
+    border-radius: 5px; /* Bordes redondeados */
+}
+
+/* Estilo para el mensaje de éxito o error */
+.mensaje {
+    margin-top: 20px; /* Separación del formulario */
+    padding: 15px; /* Relleno interno */
+    border-radius: 5px; /* Bordes redondeados */
+    font-size: 1em; /* Tamaño de fuente */
+    text-align: center; /* Centrar el texto */
+}
+
+.mensaje.error {
+    background-color: #e74c3c; /* Color de fondo para errores */
+    color: white; /* Color del texto para errores */
+}
+
+.mensaje.success {
+    background-color: #27AE60; /* Color de fondo para éxito */
+    color: white; /* Color del texto para éxito */
+}
+.detalle-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Asegúrate de que esté sobre otros elementos */
+}
+
+.detalle-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: left;
+    width: 95%; /* Aumentar un poco más el ancho */
+    max-width: 500px; /* Limitar el ancho máximo a 500px */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Sombra más intensa */
+    animation: fadeIn 0.5s ease; /* Agregar animación al abrir */
+}
+
+/* Animación para el detalle */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px); /* Desplazar ligeramente hacia arriba */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0); /* Regresar a la posición original */
+    }
+}
+
+.detalle-content img {
+    width: 100%; /* Ajusta la imagen al contenedor */
+    border-radius: 5px; /* Bordes redondeados */
+}
+
