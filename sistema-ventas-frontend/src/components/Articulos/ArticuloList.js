@@ -6,7 +6,7 @@ import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import './Articulos.css';
 
-const ArticuloList = () => {
+const ArticuloList = ({ usuarioId, onAgregarAlCarrito }) => {
     const [articulos, setArticulos] = useState([]);
     const [articuloEditado, setArticuloEditado] = useState(null);
     const [idBusqueda, setIdBusqueda] = useState('');
@@ -18,8 +18,12 @@ const ArticuloList = () => {
     }, []);
 
     const obtenerArticulos = async () => {
-        const response = await axios.get('http://localhost:8080/api/articulos');
-        setArticulos(response.data);
+        try {
+            const response = await axios.get('http://localhost:8080/api/articulos');
+            setArticulos(response.data);
+        } catch (error) {
+            console.error("Error al obtener los artículos:", error);
+        }
     };
 
     const handleEdit = (articulo) => {
@@ -27,8 +31,12 @@ const ArticuloList = () => {
     };
 
     const handleDelete = async (id) => {
-        await axios.delete(`http://localhost:8080/api/articulos/${id}`);
-        obtenerArticulos();
+        try {
+            await axios.delete(`http://localhost:8080/api/articulos/${id}`);
+            obtenerArticulos();
+        } catch (error) {
+            console.error("Error al eliminar el artículo:", error);
+        }
     };
 
     const handleArticuloGuardado = () => {
@@ -44,7 +52,7 @@ const ArticuloList = () => {
 
         try {
             const response = await axios.get(`http://localhost:8080/api/articulos/${idBusqueda}`);
-            setArticulos([response.data]); // Mostrar solo el artículo encontrado
+            setArticulos([response.data]);
             setMensaje('');
         } catch (error) {
             console.error("Error al buscar el artículo:", error);
@@ -67,15 +75,22 @@ const ArticuloList = () => {
         setArticuloSeleccionado(null);
     };
 
-    // Función para generar PDF
+    const agregarAlCarrito = async () => {
+        if (articuloSeleccionado) {
+            try {
+                await axios.post(`http://localhost:8080/api/carrito/${usuarioId}/agregar`, articuloSeleccionado);
+                alert(`${articuloSeleccionado.nombre} se añadió al carrito.`);
+            } catch (error) {
+                console.error("Error al añadir al carrito:", error);
+            }
+        }
+    };
+
     const generarPDF = () => {
         const doc = new jsPDF();
-
-        // Configuración del documento
         doc.setFontSize(12);
         doc.text("Lista de Artículos", 20, 16);
-        
-        // Agregar tabla
+
         autoTable(doc, {
             head: [['Proveedor', 'Nombre', 'Descripción', 'Categoría', 'Precio', 'Stock']],
             body: articulos.map(articulo => [
@@ -106,7 +121,6 @@ const ArticuloList = () => {
             },
         });
 
-        // Guardar el PDF
         doc.save('lista_articulos.pdf');
     };
 
@@ -122,7 +136,7 @@ const ArticuloList = () => {
                     onChange={(e) => {
                         setIdBusqueda(e.target.value);
                         if (e.target.value === '') {
-                            obtenerArticulos(); // Restaurar la lista
+                            obtenerArticulos();
                         }
                     }}
                     placeholder="Buscar por ID"
@@ -149,12 +163,13 @@ const ArticuloList = () => {
                 </thead>
                 <tbody>
                     {articulos.map((articulo) => (
-                        <Articulo 
-                            key={articulo.id} 
-                            articulo={articulo} 
-                            onEdit={handleEdit} 
-                            onDelete={handleDelete} 
-                            onDetail={handleDetail} 
+                        <Articulo
+                            key={articulo.id}
+                            articulo={articulo}
+                            onEdit={handleEdit}
+                            onDelete={handleDelete}
+                            onDetail={handleDetail}
+                            onAgregarAlCarrito={agregarAlCarrito}
                         />
                     ))}
                 </tbody>
@@ -166,12 +181,13 @@ const ArticuloList = () => {
                         <h2>Detalles del Artículo</h2>
                         <img src={articuloSeleccionado.urlFoto} alt={articuloSeleccionado.nombre} />
                         <p><strong>ID:</strong> {articuloSeleccionado.id}</p>
+                        <p><strong>Proveedor:</strong> {articuloSeleccionado.proveedorNombre}</p>
                         <p><strong>Nombre:</strong> {articuloSeleccionado.nombre}</p>
                         <p><strong>Descripción:</strong> {articuloSeleccionado.descripcion}</p>
                         <p><strong>Categoría:</strong> {articuloSeleccionado.categoria}</p>
-                        <p><strong>Proveedor:</strong> {articuloSeleccionado.proveedorNombre}</p>
                         <p><strong>Precio:</strong> Q {parseFloat(articuloSeleccionado.precio).toFixed(2)}</p>
                         <p><strong>Stock:</strong> {articuloSeleccionado.stock}</p>
+                        <button onClick={agregarAlCarrito}>Agregar al Carrito</button>
                         <button onClick={closeDetail}>Cerrar</button>
                     </div>
                 </div>

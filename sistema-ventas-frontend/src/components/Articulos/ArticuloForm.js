@@ -166,7 +166,7 @@ const ArticuloForm = ({ articuloEditado, onArticuloGuardado }) => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <h2>{articuloEditado ? 'Editar Artículo' : 'Agregar Artículo'}</h2>
+            <h2><center>{articuloEditado ? 'Editar Artículo' : 'Realizar Pedido'}</center></h2>
     
             <label htmlFor="proveedor">Proveedor:</label>
             <select id="proveedor" value={selectedProveedor} onChange={(e) => setSelectedProveedor(e.target.value)} required>

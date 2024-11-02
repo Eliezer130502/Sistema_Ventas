@@ -8,13 +8,18 @@ const Login = ({ onLogin }) => {
     const [isRegistering, setIsRegistering] = useState(false);
     const [role, setRole] = useState('cliente');
     const [adminPassword, setAdminPassword] = useState('');
-    const [nombre, setNombre] = useState(''); // Estado para el nombre del nuevo usuario
+    const [nombre, setNombre] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError(''); // Limpiar el mensaje de error previo
+        setError('');
 
+        // Validaciones
         if (isRegistering) {
+            if (!nombre || !email || !password || (role === 'administrador' && !adminPassword)) {
+                setError('Por favor, completa todos los campos requeridos.');
+                return;
+            }
             await handleRegister();
         } else {
             await handleLogin();
@@ -23,26 +28,23 @@ const Login = ({ onLogin }) => {
 
     const handleLogin = async () => {
         try {
-            const response = await fetch('http://localhost:8080/api/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email, password }),
-            });
-    
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.error || 'Error al iniciar sesión');
+            const response = await fetch('http://localhost:8080/api/usuarios');
+            const usuarios = await response.json();
+            
+            // Buscar el usuario por email
+            const usuario = usuarios.find(user => user.email === email);
+            
+            if (usuario && usuario.password === password) {
+                alert("Inicio de sesión exitoso");
+                onLogin(usuario.nombre, usuario.rol); // Pasa el nombre y rol
+            } else {
+                setError('Credenciales incorrectas');
             }
-    
-            const data = await response.json();
-            alert(data.message);
-            onLogin(data.nombre, data.rol); // Pasa el nombre y el rol del usuario
         } catch (err) {
             setError(err.message);
         }
-    };
+    }
+    
 
     const handleRegister = async () => {
         if (role === 'administrador' && adminPassword !== 'Mongo') {
@@ -51,7 +53,7 @@ const Login = ({ onLogin }) => {
         }
 
         const newUser = {
-            nombre, // Usar el nombre ingresado por el usuario
+            nombre,
             email,
             rol: role,
             password,
@@ -67,18 +69,18 @@ const Login = ({ onLogin }) => {
             });
 
             if (!response.ok) {
-                const errorData = await response.json(); // Obtener el error como JSON
+                const errorData = await response.json();
                 throw new Error(errorData.error || 'Error al registrarse');
             }
 
-            alert('Registro exitoso'); // Mensaje de éxito
-            setIsRegistering(false); // Volver al formulario de inicio de sesión
-            setNombre(''); // Limpiar el campo de nombre después del registro
+            alert('Registro exitoso');
+            setIsRegistering(false);
+            setNombre('');
             setEmail('');
             setPassword('');
             setAdminPassword('');
         } catch (err) {
-            setError(err.message); // Mostrar el error en el formulario
+            setError(err.message);
         }
     };
 
